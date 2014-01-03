@@ -1,0 +1,15 @@
+import com.github.tschulte.gradle.plugindescriptor.PluginDescriptorPlugin
+
+
+apply plugin: "groovy"
+apply plugin: PluginDescriptorPlugin
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    testCompile 'junit:junit:4.11'
+}
