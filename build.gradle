@@ -1,13 +1,16 @@
 buildscript {
 	repositories {
 		jcenter()
+		maven { url "https://oss.sonatype.org/content/groups/public"}
 	}
 	dependencies {
 		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
+		classpath 'com.github.townsfolk:gradle-release:1.2'
 	}
 }
 
 apply plugin: 'bintray'
+apply plugin: 'release'
 apply plugin: 'maven-publish'
 plugins.apply de.gliderpilot.gradle.plugins.gradleplugin.GradlePluginPlugin
 
