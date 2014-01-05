@@ -1,3 +1,14 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
+	}
+}
+
+apply plugin: 'bintray'
+apply plugin: 'maven-publish'
 plugins.apply de.gliderpilot.gradle.plugins.gradleplugin.GradlePluginPlugin
 
 repositories {
@@ -7,3 +18,52 @@ repositories {
 dependencies {
     testCompile 'junit:junit:4.11'
 }
+
+task sourcesJar(type: Jar) {
+	from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "tschulte"
+            name "Tobias Schulte"
+            email "tobias.schulte@gliderpilot.de"
+        }
+    }
+}
+
+publishing {
+	publications {
+		plugin(MavenPublication) {
+			from components.java
+			artifact sourcesJar
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'A gradle plugin for generating gradle plugin descriptors')
+                root.children().last() + pomConfig
+            }
+		}
+	}
+}
+
+bintray {
+	user = bintrayUser
+	key = bintrayKey
+	publications = ['plugin'] // When uploading Maven-based publication files
+	pkg {
+        repo = 'maven'
+        name = 'gradle-gradle-plugin-plugin'
+        licenses = ['Apache-2.0']
+	}
+}
+
+bintrayUpload.dependsOn(build, sourcesJar)
