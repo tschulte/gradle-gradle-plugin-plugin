@@ -1,48 +1,47 @@
-package com.github.tschulte.gradle.plugindescriptor
+package de.gliderpilot.gradle.plugins.gradleplugin
 
 import static org.junit.Assert.*
+import static org.junit.Assert.*
+
 import org.gradle.testfixtures.ProjectBuilder
-
-import static org.junit.Assert.*
-
 import org.junit.Test
 
 
-class TestPluginDescriptorPlugin {
+class TestGradlePluginPlugin {
 
 	@Test
 	public void testApplyPluginDescriptorPlugin() {
 		def project = ProjectBuilder.builder().build()
 		project.with {
-			apply plugin: 'plugin-descriptor'
+			apply plugin: 'gradle-plugin'
 		}
 
-		assertNotNull project.tasks.generateMainPluginDescriptors
+		assertNotNull project.tasks.generateMainGradlePluginDescriptors
 
 	}
 	@Test
 	public void testApplyPluginDescriptorPluginEnableForMain() {
 		def project = ProjectBuilder.builder().build()
 		project.with {
-			apply plugin: 'plugin-descriptor'
-			pluginDescriptor {
+			apply plugin: 'gradle-plugin'
+			gradlePluginDescriptor {
 				enableFor(sourceSets.main)
 			}
 		}
 
-		assertNotNull project.tasks.generateMainPluginDescriptors
+		assertNotNull project.tasks.generateMainGradlePluginDescriptors
 	}
 	@Test
 	public void testApplyPluginDescriptorPluginEnableForTest() {
 		def project = ProjectBuilder.builder().build()
 		project.with {
-			apply plugin: 'plugin-descriptor'
-			pluginDescriptor {
+			apply plugin: 'gradle-plugin'
+			gradlePluginDescriptor {
 				enableFor(sourceSets.test)
 			}
 		}
 
-		assertNotNull project.tasks.generateTestPluginDescriptors
+		assertNotNull project.tasks.generateTestGradlePluginDescriptors
 	}
 
 }

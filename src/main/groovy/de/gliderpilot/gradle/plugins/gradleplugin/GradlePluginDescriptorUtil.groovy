@@ -1,8 +1,8 @@
-package com.github.tschulte.gradle.plugindescriptor
+package de.gliderpilot.gradle.plugins.gradleplugin
 
 import java.util.regex.Pattern
 
-class PluginDescriptorUtil {
+class GradlePluginDescriptorUtil {
 
 	private static final Pattern PACKAGE = ~/^.*\./
 	private static final Pattern PLUGIN_SUFFIX = ~/Plugin$/
@@ -19,7 +19,7 @@ class PluginDescriptorUtil {
 	}
 	
 	static def pluginDescriptors(File baseDir, Iterable<File> pluginClassFiles) {
-		def pluginDescriptorData = PluginDescriptorUtil.&pluginDescriptor.curry(baseDir)
+		def pluginDescriptorData = GradlePluginDescriptorUtil.&pluginDescriptor.curry(baseDir)
 		pluginClassFiles.collect(pluginDescriptorData).collectEntries()
 	}
 

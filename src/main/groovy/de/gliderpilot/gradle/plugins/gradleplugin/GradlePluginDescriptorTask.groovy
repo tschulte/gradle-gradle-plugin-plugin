@@ -1,10 +1,10 @@
-package com.github.tschulte.gradle.plugindescriptor
+package de.gliderpilot.gradle.plugins.gradleplugin
 
 import org.gradle.api.*
 import org.gradle.api.file.ConfigurableFileTree
 import org.gradle.api.tasks.*
 
-class PluginDescriptorTask extends DefaultTask {
+class GradlePluginDescriptorTask extends DefaultTask {
 	
 	
     private ConfigurableFileTree pluginFiles
@@ -45,7 +45,7 @@ class PluginDescriptorTask extends DefaultTask {
     }
 	
 	def pluginDescriptors() {
-		PluginDescriptorUtil.pluginDescriptors(pluginFiles.dir, pluginFiles.files)
+		GradlePluginDescriptorUtil.pluginDescriptors(pluginFiles.dir, pluginFiles.files)
 	}
 	
 }
