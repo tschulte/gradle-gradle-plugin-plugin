@@ -17,7 +17,7 @@ class TestGradlePluginDescriptorPlugin {
 			apply plugin: 'gradle-plugin-descriptor'
 		}
 
-		assertNotNull project.tasks.generateMainGradlePluginDescriptors
+		assertNotNull project.tasks.generateGradlePluginDescriptors
 
 	}
 	@Test
@@ -31,7 +31,7 @@ class TestGradlePluginDescriptorPlugin {
 			}
 		}
 
-		assertNotNull project.tasks.generateMainGradlePluginDescriptors
+		assertNotNull project.tasks.generateGradlePluginDescriptors
 	}
 	@Test
 	public void testApplyPluginDescriptorPluginEnableForTest() {

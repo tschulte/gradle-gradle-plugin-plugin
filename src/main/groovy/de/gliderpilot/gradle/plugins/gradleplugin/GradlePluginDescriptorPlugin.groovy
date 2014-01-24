@@ -21,9 +21,9 @@ public class GradlePluginDescriptorPlugin implements Plugin<Project> {
 
     void enableFor(SourceSet sourceSet) {
         def name = sourceSet.name
-        def generatedResources = "${project.buildDir}/generated-gradle-plugin-descriptors/$name"
+        def generatedResources = "${project.buildDir}/generated-resources/$name/gradle-plugin-descriptors"
         def nameFirstUpper = name.capitalize()
-        def taskName = "generate${nameFirstUpper}GradlePluginDescriptors"
+        def taskName = sourceSet.getTaskName("generate", "GradlePluginDescriptors")
 		if (!project.tasks.names.contains(taskName)) {
 	        sourceSet.output.dir(generatedResources, builtBy: taskName)
 	
