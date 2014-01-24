@@ -25,12 +25,18 @@ public class GradlePluginDescriptorPlugin implements Plugin<Project> {
         def nameFirstUpper = name.capitalize()
         def taskName = sourceSet.getTaskName("generate", "GradlePluginDescriptors")
 		if (!project.tasks.names.contains(taskName)) {
-	        sourceSet.output.dir(generatedResources, builtBy: taskName)
-	
-	        project.task(taskName, type: GradlePluginDescriptorTask) {
-	            from sourceSet.output.classesDir
-	            into "$generatedResources/META-INF/gradle-plugins"
-	        }
+			def task = project.task(taskName, type: GradlePluginDescriptorTask) {
+				from sourceSet.output.classesDir
+				into "$generatedResources/META-INF/gradle-plugins"
+			}
+			/*
+			 * generatedResources might not exist yet, therefore need to set generatedResources lazily
+			 * by wrapping it in a closure
+			 */
+			sourceSet.resources.srcDir({generatedResources})
+			project.tasks.getByName(sourceSet.processResourcesTaskName) {
+				dependsOn task
+			}
 		}
 
     }
