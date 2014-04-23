@@ -1,3 +1,5 @@
+### Build Status
+[![Build Status](https://travis-ci.org/tschulte/gradle-gradle-plugin-plugin.svg?branch=master)](https://travis-ci.org/tschulte/gradle-gradle-plugin-plugin)
 # Overview
 This plugin creates gradle plugin descriptor files.
 
